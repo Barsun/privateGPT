@@ -1,4 +1,4 @@
-GNU nano 4.8                                                                                         entrypoint.sh                                                                                                    
+GNU nano 4.8                                                                                                
 #!/bin/bash
 
 # Start Ollama in the background.
