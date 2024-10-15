@@ -98,7 +98,7 @@ huggingface:
   trust_remote_code: true
 
 vectorstore:
-  database: chroma
+  database: qdrant
 
 nodestore:
   database: simple
@@ -110,8 +110,6 @@ milvus:
 
 qdrant:
   path: local_data/private_gpt/qdrant
-chroma:
-  path: local_data/private_gpt/chroma
 
 postgres:
   host: localhost
