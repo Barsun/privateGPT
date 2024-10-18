@@ -386,7 +386,7 @@ class PrivateGptUi:
             "#col { height: calc(100vh - 112px - 16px) !important; }"
             "hr { margin-top: 1em; margin-bottom: 1em; border: 0; border-top: 1px solid #FFF; }"
             ".avatar-image { background-color: antiquewhite; border-radius: 2px; }"
-            ".footer { display: none !important; }",
+            "footer { display: none !important; }",
         ) as blocks:
             with gr.Row():
                 gr.HTML(f"<div class='logo'/><img src={logo_svg} alt=laplateforme_gpt><br>Une Génération augmentée par récupération - un LLM Privé et Personalisé</div")
