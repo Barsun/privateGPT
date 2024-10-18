@@ -364,10 +364,9 @@ class PrivateGptUi:
         ]
 
     def _build_ui_blocks(self) -> gr.Blocks:
-        logger.debug("Creating the UI blocks")
         with gr.Blocks(
             title=UI_TAB_TITLE,
-            theme=gr.themes.Soft(primary_hue=slate),
+            theme=gr.themes.Soft(primary_hue=slate, light=True),
             css=".logo { "
             "display:flex;"
             "background-color: #FFFFFF;"
@@ -375,8 +374,7 @@ class PrivateGptUi:
             "color: #002060;"
             "font-size: 1.5rem;"
             "border-radius: 8px;"
-            "align-content: center;"
-            "justify-content: center;"
+            "place-content: space-evenly;"
             "align-items: center;"
             "}"
             ".logo img { height: 100% }"
