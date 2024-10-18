@@ -32,15 +32,15 @@ THIS_DIRECTORY_RELATIVE = Path(__file__).parent.relative_to(PROJECT_ROOT_PATH)
 # Should be "private_gpt/ui/avatar-bot.ico"
 AVATAR_BOT = THIS_DIRECTORY_RELATIVE / "avatar-bot.ico"
 
-UI_TAB_TITLE = "My Private GPT"
+UI_TAB_TITLE = "Inquizyt Socle - IA Générative"
 
 SOURCES_SEPARATOR = "<hr>Sources: \n"
 
 
 class Modes(str, Enum):
-    RAG_MODE = "RAG"
-    SEARCH_MODE = "Search"
-    BASIC_CHAT_MODE = "Basic"
+    RAG_MODE = "Recherche de fichiers"
+    SEARCH_MODE = "Requête de fichiers"
+    BASIC_CHAT_MODE = "Discussion LLM (sans contexte des fichiers)"
     SUMMARIZE_MODE = "Summarize"
 
 
@@ -370,8 +370,10 @@ class PrivateGptUi:
             theme=gr.themes.Soft(primary_hue=slate),
             css=".logo { "
             "display:flex;"
-            "background-color: #C7BAFF;"
+            "background-color: #FFFFFF;"
             "height: 80px;"
+            "color: #002060;"
+            "font-size: 1.5rem;"
             "border-radius: 8px;"
             "align-content: center;"
             "justify-content: center;"
@@ -390,7 +392,7 @@ class PrivateGptUi:
             ".footer-zylon-ico { height: 20px; margin-left: 5px; background-color: antiquewhite; border-radius: 2px; }",
         ) as blocks:
             with gr.Row():
-                gr.HTML(f"<div class='logo'/><img src={logo_svg} alt=PrivateGPT></div")
+                gr.HTML(f"<div class='logo'/><img src={logo_svg} alt=laplateforme_gpt><br>Une Génération augmentée par récupération - un LLM Privé et Personalisé</div")
 
             with gr.Row(equal_height=False):
                 with gr.Column(scale=3):
@@ -407,15 +409,15 @@ class PrivateGptUi:
                         interactive=False,
                     )
                     upload_button = gr.components.UploadButton(
-                        "Upload File(s)",
+                        "Charger un (ou des) fichier(s)",
                         type="filepath",
                         file_count="multiple",
                         size="sm",
                     )
                     ingested_dataset = gr.List(
                         self._list_ingested_files,
-                        headers=["File name"],
-                        label="Ingested Files",
+                        headers=["Nom du (ou des) fichier(s)"],
+                        label="Fichiers importés, Maximum 10 fichiers",
                         height=235,
                         interactive=False,
                         render=False,  # Rendered under the button
@@ -431,19 +433,19 @@ class PrivateGptUi:
                     )
                     ingested_dataset.render()
                     deselect_file_button = gr.components.Button(
-                        "De-select selected file", size="sm", interactive=False
+                        "🗑️ Supprimer le (ou les) fichier(s) sélectionné(s)", size="sm", interactive=False
                     )
                     selected_text = gr.components.Textbox(
-                        "All files", label="Selected for Query or Deletion", max_lines=1
+                        "Tous les documents", label="Sélectionné pour la recherche ou la suppression", max_lines=1
                     )
                     delete_file_button = gr.components.Button(
-                        "🗑️ Delete selected file",
+                        "🗑️ Supprimer le (ou les) fichier(s) sélectionné(s)",
                         size="sm",
                         visible=settings().ui.delete_file_button_enabled,
                         interactive=False,
                     )
                     delete_files_button = gr.components.Button(
-                        "⚠️ Delete ALL files",
+                        "⚠️ Supprimer tous les fichiers",
                         size="sm",
                         visible=settings().ui.delete_all_files_button_enabled,
                     )
@@ -483,7 +485,7 @@ class PrivateGptUi:
                     )
                     system_prompt_input = gr.Textbox(
                         placeholder=self._system_prompt,
-                        label="System Prompt",
+                        label="Prompt Système",
                         lines=2,
                         interactive=True,
                         render=False,
@@ -562,10 +564,8 @@ class PrivateGptUi:
                     )
 
             with gr.Row():
-                avatar_byte = AVATAR_BOT.read_bytes()
-                f_base64 = f"data:image/png;base64,{base64.b64encode(avatar_byte).decode('utf-8')}"
                 gr.HTML(
-                    f"<div class='footer'><a class='footer-zylon-link' href='https://zylon.ai/'>Maintained by Zylon <img class='footer-zylon-ico' src='{f_base64}' alt=Zylon></a></div>"
+                    f"<div class='footer'></div>"
                 )
 
         return blocks
