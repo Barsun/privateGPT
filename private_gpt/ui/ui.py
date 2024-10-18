@@ -256,13 +256,13 @@ class PrivateGptUi:
     def _get_default_mode_explanation(mode: Modes) -> str:
         match mode:
             case Modes.RAG_MODE:
-                return "Get contextualized answers from selected files."
+                return "Obtenez des réponses contextualisées à partir de fichiers sélectionnés."
             case Modes.SEARCH_MODE:
-                return "Find relevant chunks of text in selected files."
+                return "Recherchez des morceaux de texte pertinents dans les fichiers sélectionnés."
             case Modes.BASIC_CHAT_MODE:
-                return "Chat with the LLM using its training data. Files are ignored."
+                return "Discutez avec le LLM en utilisant ses données de formation. Les fichiers sont ignorés."
             case Modes.SUMMARIZE_MODE:
-                return "Generate a summary of the selected files. Prompt to customize the result."
+                return "Générer un résumé des fichiers sélectionnés. Invite à personnaliser le résultat."
             case _:
                 return ""
 
@@ -379,17 +379,14 @@ class PrivateGptUi:
             "justify-content: center;"
             "align-items: center;"
             "}"
-            ".logo img { height: 25% }"
+            ".logo img { height: 100% }"
             ".contain { display: flex !important; flex-direction: column !important; }"
             "#component-0, #component-3, #component-10, #component-8  { height: 100% !important; }"
             "#chatbot { flex-grow: 1 !important; overflow: auto !important;}"
             "#col { height: calc(100vh - 112px - 16px) !important; }"
             "hr { margin-top: 1em; margin-bottom: 1em; border: 0; border-top: 1px solid #FFF; }"
             ".avatar-image { background-color: antiquewhite; border-radius: 2px; }"
-            ".footer { text-align: center; margin-top: 20px; font-size: 14px; display: flex; align-items: center; justify-content: center; }"
-            ".footer-zylon-link { display:flex; margin-left: 5px; text-decoration: auto; color: var(--body-text-color); }"
-            ".footer-zylon-link:hover { color: #C7BAFF; }"
-            ".footer-zylon-ico { height: 20px; margin-left: 5px; background-color: antiquewhite; border-radius: 2px; }",
+            ".footer { display: none !important; }",
         ) as blocks:
             with gr.Row():
                 gr.HTML(f"<div class='logo'/><img src={logo_svg} alt=laplateforme_gpt><br>Une Génération augmentée par récupération - un LLM Privé et Personalisé</div")
@@ -551,7 +548,7 @@ class PrivateGptUi:
                     _ = gr.ChatInterface(
                         self._chat,
                         chatbot=gr.Chatbot(
-                            label=label_text,
+                            label="",
                             show_copy_button=True,
                             elem_id="chatbot",
                             render=False,
