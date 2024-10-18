@@ -366,7 +366,7 @@ class PrivateGptUi:
     def _build_ui_blocks(self) -> gr.Blocks:
         with gr.Blocks(
             title=UI_TAB_TITLE,
-            theme=gr.themes.Soft(primary_hue=slate, light=True),
+            theme=gr.themes.Soft(primary_hue=slate),
             css=".logo { "
             "display:flex;"
             "background-color: #FFFFFF;"
